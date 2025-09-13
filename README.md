@@ -10,7 +10,7 @@ It uses machine learning to classify URLs as **legitimate** or **phishing**, and
 - 💬 Custom greetings via `greetings.py`
 
 # 📂 Project Structure
-C:\Phishing_detector
+C:\SecureSurf Agent
 │── train_model.py # 
 │── Phishing_Tool.py # Detect phishing URLs with the model
 │── greetings.py # Custom greeting tool for Orchestrate
