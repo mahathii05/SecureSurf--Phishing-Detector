@@ -1,0 +1,13 @@
+spec_version: v1
+kind: native
+name: phishing
+description: SecureSurf — your safe phishing-check assistant
+instructions: |
+  Always run the tool "greeting" at session start.
+  After greeting, analyze URLs using the "check_url" tool.
+  Keep answers short, safety-focused, and clear.
+llm: watsonx/meta-llama/llama-3-2-90b-vision-instruct
+style: default
+tools:
+  - greeting
+  - check_url
