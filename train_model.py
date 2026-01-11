@@ -5,7 +5,6 @@ from sklearn.linear_model import LogisticRegression
 import joblib
 
 def clean_labels(label):
-    # Convert to int if possible (0 = legitimate, 1 = phishing)
     try:
         return int(label)
     except:
@@ -13,18 +12,11 @@ def clean_labels(label):
 
 def train_and_save():
     print("[INFO] Loading dataset...")
-    df = pd.read_csv("phishing_data.csv")  # make sure file name is correct
+    df = pd.read_csv("phishing_data.csv")  
 
-    # Drop NaN values in essential columns
     df = df.dropna(subset=["URL", "ClassLabel"])
-
-    # Clean labels
     df["ClassLabel"] = df["ClassLabel"].apply(clean_labels)
-
-    # Features (X) = URLs
     X = df["URL"].astype(str)
-
-    # Target (y) = Class labels
     y = df["ClassLabel"].astype(int)
 
     print("[INFO] Splitting dataset...")
@@ -43,11 +35,10 @@ def train_and_save():
 
     acc = model.score(X_test_vec, y_test)
     print(f"[INFO] Model trained with accuracy: {acc:.2f}")
-
-    # Save model + vectorizer
     joblib.dump(model, "phishing_model.pkl")
     joblib.dump(vectorizer, "vectorizer.pkl")
     print("[INFO] Model and vectorizer saved successfully!")
 
 if __name__ == "__main__":
     train_and_save()
+
