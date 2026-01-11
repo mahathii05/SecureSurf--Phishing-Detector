@@ -1,20 +1,6 @@
-# phishing_tool.py
-"""
-Lightweight heuristic phishing checker for Watsonx Orchestrate (Option A).
-No scikit-learn dependency — safe to import in WXO tool runtime.
-
-Usage:
-  - Import into Orchestrate:
-      orchestrate tools import -k python -f phishing_tool.py
-  - Test locally:
-      python phishing_tool.py
-"""
-
 import re
 from urllib.parse import urlparse
 from ibm_watsonx_orchestrate.agent_builder.tools import tool
-
-# Shorteners and suspicious keyword patterns (tune as needed)
 SHORTENERS = re.compile(
     r"(bit\.ly|tinyurl|goo\.gl|ow\.ly|t\.co|cutt\.ly|is\.gd|tiny\.cc|short\.ly)",
     re.I,
@@ -41,7 +27,6 @@ def check_url(url: str) -> str:
             return "Please provide a non-empty URL string."
 
         u = url.strip()
-        # ensure scheme for urlparse
         if not re.match(r'^[a-zA-Z]+://', u):
             u = "http://" + u
 
@@ -95,10 +80,10 @@ def check_url(url: str) -> str:
             score += 1
             reasons.append("Hyphen in domain")
 
-        # final decision threshold (tuneable)
+        # final decision threshold
         label = "Phishing" if score >= 4 else "Legitimate"
 
-        # simple confidence proxy (0.2 baseline + 0.18 per score point)
+        # simple confidence proxy
         conf = min(0.99, 0.20 + 0.18 * score)
         reasons_text = ", ".join(reasons) if reasons else "none detected"
 
@@ -112,9 +97,6 @@ def check_url(url: str) -> str:
 
     except Exception as e:
         return f"[ERROR] Exception during check: {str(e)}"
-
-
-# Local test harness so you can run it directly
 if __name__ == "__main__":
     tests = [
         "http://metamsk01lgix.godaddysites.com/",
@@ -127,3 +109,4 @@ if __name__ == "__main__":
         print("===\nInput:", t)
         print(check_url(t))
         print()
+
