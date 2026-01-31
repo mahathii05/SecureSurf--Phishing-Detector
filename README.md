@@ -11,17 +11,12 @@ It uses machine learning to classify URLs as **legitimate** or **phishing**, and
 
 # 📂 Project Structure
 C:\SecureSurf Agent
-│── train_model.py # 
-│── Phishing_Tool.py # Detect phishing URLs with the model
-│── greetings.py # Custom greeting tool for Orchestrate
-│── phishing.yaml # Watsonx Orchestrate agent config
-│── requirements.txt # Python dependencies
-│── README.md # Project documentation
-
-# Watsonx Orchestrate Integration
->Import phishing.yaml into Watsonx Orchestrate.
->Add the SecureSurf Agent to your workspace.
->Use the greetings.py tool for a customized introduction (e.g., "Hey, I’m SecureSurf, your safe AI assistant!").
+│── train_model.py  
+│── Phishing_Tool.py 
+│── greetings.py 
+│── phishing.yaml 
+│── requirements.txt 
+│── README.md
 
 🛠 Requirements
 >Python 3.9+
